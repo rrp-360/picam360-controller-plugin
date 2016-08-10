@@ -54,7 +54,9 @@ function Handler()
 				move_cmd[1]["repeats"] = 28;
 				message = JSON.stringify(move_cmd);
 			}
-			client.send(message, 0, message.length, PORT, HOST);
+			var buffer = new Buffer(message);
+			client.send(buffer, 0, buffer.length, PORT, HOST);
+			console.log("send : " + message);
 		}
 	};
 }
