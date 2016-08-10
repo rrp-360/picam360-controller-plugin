@@ -6,6 +6,6 @@
   "start": "node app"
  },
  "dependencies": {
-  "node-gamepad" : "0.1.15"
+  "gamepad" : "1.2.2"
  }
 }
