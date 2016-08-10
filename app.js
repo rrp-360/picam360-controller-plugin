@@ -13,7 +13,7 @@ handler.init();
 
 setInterval(gamepad.processEvents, 16);
 
-var values = [];
+var values = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 // Listen for move events on all gamepads
 gamepad.on("move", function(id, axis, value) {
 	console.log("move", {
