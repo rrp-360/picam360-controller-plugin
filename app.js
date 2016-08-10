@@ -13,6 +13,7 @@ handler.init();
 
 setInterval(gamepad.processEvents, 16);
 
+var values = [];
 // Listen for move events on all gamepads
 gamepad.on("move", function(id, axis, value) {
 	console.log("move", {
@@ -20,15 +21,9 @@ gamepad.on("move", function(id, axis, value) {
 		axis : axis,
 		value : value,
 	});
-	switch (axis) {
-	case 0:
-		break;
-	case 1:
-		break;
-	case 3:
-		break;
-	case 4:
-		break;
+	values[axis] = value;
+	if(axis == 6 || axis == 7) {
+		handler.move(values[6], 0, values[7]);
 	}
 });
 
