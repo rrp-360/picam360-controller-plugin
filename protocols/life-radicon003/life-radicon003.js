@@ -77,9 +77,12 @@ function Handler()
 			var buffer = new Buffer(message);
 			var dgram = require('dgram');
 			var client = dgram.createSocket('udp4');
-			client.send(buffer, 0, buffer.length, PORT, HOST);
-			client.close();
-			console.log("send : " + message);
+			client.send(buffer, 0, buffer.length, PORT, HOST, function(err, bytes) {
+			    if (err) throw err;
+			    console.log('UDP message sent to ' + HOST +':'+ PORT);
+				console.log("send : " + message);
+			    client.close();
+			});
 		}
 	};
 }
