@@ -3,8 +3,6 @@ function Handler()
 	var PORT = 12345;
 	var HOST = '127.0.0.1';
 	
-	var client;
-	
 	function get_index(v) {
 		if(v < 0) {
 			return 0;
@@ -64,8 +62,6 @@ function Handler()
 				child_process.exec('sudo /home/pi/git/pi-rc/pi_pcm');
 				console.log("pi_pcm lunched.");
 				
-				var dgram = require('dgram');
-				client = dgram.createSocket('udp4');
 				console.log("udp client ready.");
 			});
 		},
@@ -79,7 +75,10 @@ function Handler()
 				message = JSON.stringify(move_cmd);
 			}
 			var buffer = new Buffer(message);
+			var dgram = require('dgram');
+			var client = dgram.createSocket('udp4');
 			client.send(buffer, 0, buffer.length, PORT, HOST);
+			client.close();
 			console.log("send : " + message);
 		}
 	};
