@@ -59,8 +59,11 @@ function Handler()
 			var child_process = require('child_process');
 			child_process.exec('sudo killall pi_pcm', function() {
 				console.log("pi_pcm killed.");
-				child_process.exec('sudo /home/pi/git/pi-rc/pi_pcm');
-				console.log("pi_pcm lunched.");
+				
+				var lunch_pi_pcm = function() {
+					console.log("pi_pcm lunched.");
+					child_process.exec('sudo /home/pi/git/pi-rc/pi_pcm', lunch_pi_pcm);
+				};
 				
 				console.log("udp client ready.");
 			});
