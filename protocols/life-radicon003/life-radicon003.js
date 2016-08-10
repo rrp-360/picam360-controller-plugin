@@ -5,6 +5,26 @@ function Handler()
 	
 	var client;
 	
+	function get_index(v) {
+		if(v < 0) {
+			return 0;
+		} else if(v == 0) {
+			return 1;
+		} else {
+			return 2;
+		}
+	}
+	var repeat_data = [
+		[//left
+			[1,46,1]//backward,nutral,forward
+		],
+		[//nutral
+			[52,0,34]//backward,nutral,forward
+		],
+		[//right
+			[1,28,1]//backward,nutral,forward
+		]
+	];
 	var move_cmd = [
 	    {
 	        "frequency": 27.12,
@@ -51,7 +71,7 @@ function Handler()
 			if(x == 0 && z == 0) {
 				message = JSON.stringify(stop_cmd);
 			} else {
-				move_cmd[1]["repeats"] = 28;
+				move_cmd[1]["repeats"] = repeat_data[get_index(x)][get_index(z)];
 				message = JSON.stringify(move_cmd);
 			}
 			var buffer = new Buffer(message);
