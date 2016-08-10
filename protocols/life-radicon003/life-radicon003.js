@@ -7,16 +7,18 @@ function Handler()
 	
 	return {
 		init : function(){
+			console.log("init start.");
 			var child_process = require('child_process');
 			child_process.exec('sudo killall pi_pcm', function() {
+				console.log("pi_pcm killed.");
 				child_process.exec('sudo /home/pi/git/pi-rc/pi_pcm', function() {
 					console.log("pi_pcm ready.");
 					
 					var dgram = require('dgram');
 					client = dgram.createSocket('udp4');
 					console.log("udp client ready.");
-				};
-			}
+				});
+			});
 		},
 		move : function(x,y,z){
 			console.log("move");
