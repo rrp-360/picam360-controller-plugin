@@ -5,6 +5,32 @@ function Handler()
 	
 	var client;
 	
+	var move_cmd = [
+	    {
+	        "frequency": 27.12,
+	        "dead_frequency": 0.5,
+	        "burst_us": 1380,
+	        "spacing_us": 460,
+	        "repeats": 4
+	    },
+	    {
+	        "frequency": 27.12,
+	        "dead_frequency": 0.5,
+	        "burst_us": 460,
+	        "spacing_us": 460,
+	        "repeats": 0
+	    }
+	];
+	var stop_cmd = [
+	    {
+	        "frequency": 0.5,
+	        "dead_frequency": 0.5,
+	        "burst_us": 1380,
+	        "spacing_us": 460,
+	        "repeats": 4
+	    }
+	];
+	
 	return {
 		init : function(){
 			console.log("init start.");
@@ -21,7 +47,14 @@ function Handler()
 		},
 		move : function(x,y,z){
 			console.log("move");
-			//client.send(message, 0, message.length, PORT, HOST, function(err, bytes) {});
+			var message;
+			if(x == 0 && z == 0) {
+				message = JSON.stringify(stop_cmd);
+			} else {
+				move_cmd[1]["repeats"] = 28;
+				message = JSON.stringify(move_cmd);
+			}
+			client.send(message, 0, message.length, PORT, HOST);
 		}
 	};
 }
