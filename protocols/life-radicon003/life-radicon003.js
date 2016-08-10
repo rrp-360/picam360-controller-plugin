@@ -14,11 +14,11 @@ function Handler()
 	}
 	var repeat_data = [
 		//left
-		[1,46,1],//backward,nutral,forward
+		[64,46,40],//forward,nutral,backward
 		//nutral
-		[52,1,34],//backward,nutral,forward
+		[34,1,52],//forward,nutral,backward
 		//right
-		[1,28,1]//backward,nutral,forward
+		[10,28,58]//forward,nutral,backward
 	];
 	var move_cmd = [
 	    {
