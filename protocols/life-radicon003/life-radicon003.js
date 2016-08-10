@@ -15,15 +15,12 @@ function Handler()
 		}
 	}
 	var repeat_data = [
-		[//left
-			[1,46,1]//backward,nutral,forward
-		],
-		[//nutral
-			[52,0,34]//backward,nutral,forward
-		],
-		[//right
-			[1,28,1]//backward,nutral,forward
-		]
+		//left
+		[1,46,1],//backward,nutral,forward
+		//nutral
+		[52,0,34],//backward,nutral,forward
+		//right
+		[1,28,1]//backward,nutral,forward
 	];
 	var move_cmd = [
 	    {
