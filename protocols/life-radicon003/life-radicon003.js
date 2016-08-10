@@ -18,7 +18,7 @@ function Handler()
 		//left
 		[1,46,1],//backward,nutral,forward
 		//nutral
-		[52,0,34],//backward,nutral,forward
+		[52,1,34],//backward,nutral,forward
 		//right
 		[1,28,1]//backward,nutral,forward
 	];
@@ -35,7 +35,7 @@ function Handler()
 	        "dead_frequency": 0.5,
 	        "burst_us": 460,
 	        "spacing_us": 460,
-	        "repeats": 0
+	        "repeats": 1
 	    }
 	];
 	var stop_cmd = [
@@ -45,6 +45,13 @@ function Handler()
 	        "burst_us": 1380,
 	        "spacing_us": 460,
 	        "repeats": 4
+	    },
+	    {
+	        "frequency": 0.5,
+	        "dead_frequency": 0.5,
+	        "burst_us": 460,
+	        "spacing_us": 460,
+	        "repeats": 1
 	    }
 	];
 	
