@@ -74,7 +74,7 @@ function Handler()
 			});
 		},
 		move : function(x,y,z){
-			console.log("move");
+			//console.log("move");
 			var message;
 			if(x == 0 && z == 0) {
 				message = JSON.stringify(stop_cmd);
@@ -84,9 +84,7 @@ function Handler()
 			}
 			var buffer = new Buffer(message);
 			client.send(buffer, 0, buffer.length, PORT, HOST, function(err, bytes) {
-			    //if (err) throw err;
-			    console.log('UDP message sent to ' + HOST +':'+ PORT);
-				console.log("send : " + message);
+				//console.log("send : " + message);
 			});
 		}
 	};
