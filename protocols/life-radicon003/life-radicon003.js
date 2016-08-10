@@ -1,8 +1,6 @@
-
-module.exports = function()
+function Handler()
 {
-	return function()
-	{
+	return {
 		init : function(){
 		},
 		move : function(x,y,z){
@@ -10,3 +8,4 @@ module.exports = function()
 		}
 	};
 }
+module.exports = new Handler();

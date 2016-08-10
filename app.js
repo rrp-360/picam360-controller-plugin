@@ -1,3 +1,5 @@
+process.chdir(__dirname);
+
 var gamepad = require("gamepad");
 
 gamepad.init();
@@ -5,7 +7,7 @@ console.log('gamepad : ' + gamepad.numDevices());
 console.log(gamepad);
 
 var protocol_name = "life-radicon003";
-var handler = require(["protocols", protocol_name, protocol_name + ".js"].join("/"));
+var handler = require(["./protocols", protocol_name, protocol_name + ".js"].join("/"));
 
 handler.init();
 
