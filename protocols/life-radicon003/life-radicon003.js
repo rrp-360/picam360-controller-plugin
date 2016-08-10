@@ -53,6 +53,8 @@ function Handler()
 	    }
 	];
 	
+	var client;
+	
 	return {
 		init : function(){
 			console.log("init start.");
@@ -64,7 +66,10 @@ function Handler()
 					console.log("pi_pcm lunched.");
 					child_process.exec('sudo /home/pi/git/pi-rc/pi_pcm', lunch_pi_pcm);
 				};
+				lunch_pi_pcm();
 				
+				var dgram = require('dgram');
+				client = dgram.createSocket('udp4');
 				console.log("udp client ready.");
 			});
 		},
@@ -78,13 +83,10 @@ function Handler()
 				message = JSON.stringify(move_cmd);
 			}
 			var buffer = new Buffer(message);
-			var dgram = require('dgram');
-			var client = dgram.createSocket('udp4');
 			client.send(buffer, 0, buffer.length, PORT, HOST, function(err, bytes) {
-			    if (err) throw err;
+			    //if (err) throw err;
 			    console.log('UDP message sent to ' + HOST +':'+ PORT);
 				console.log("send : " + message);
-			    client.close();
 			});
 		}
 	};
