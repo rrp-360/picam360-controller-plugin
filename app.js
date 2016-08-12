@@ -12,6 +12,7 @@ var handler = require(["./protocols", protocol_name, protocol_name + ".js"].join
 handler.init();
 
 setInterval(gamepad.processEvents, 16);
+setInterval(gamepad.detectDevices, 500);
 
 var values = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 // Listen for move events on all gamepads

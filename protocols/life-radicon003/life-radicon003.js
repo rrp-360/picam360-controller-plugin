@@ -53,40 +53,49 @@ function Handler()
 	    }
 	];
 	
-	var client;
+	var child_process = require('child_process');
+	var client = null;
 	
-	return {
+	function get_client(callback) {
+		if(client == null) {
+			console.log("init start.");
+			var lunch_pi_pcm = function() {
+				console.log("pi_pcm lunched.");
+				child_process.exec('sudo /home/pi/git/pi-rc/pi_pcm', lunch_pi_pcm);
+			};
+			lunch_pi_pcm();
+				
+			var dgram = require('dgram');
+			client = dgram.createSocket('udp4');
+			console.log("udp client ready.");
+		}
+		callback(client);
+	}
+	
+	var _this =  {
 		init : function(){
 			console.log("init start.");
-			var child_process = require('child_process');
 			child_process.exec('sudo killall pi_pcm', function() {
 				console.log("pi_pcm killed.");
-				
-				var lunch_pi_pcm = function() {
-					console.log("pi_pcm lunched.");
-					child_process.exec('sudo /home/pi/git/pi-rc/pi_pcm', lunch_pi_pcm);
-				};
-				lunch_pi_pcm();
-				
-				var dgram = require('dgram');
-				client = dgram.createSocket('udp4');
-				console.log("udp client ready.");
 			});
 		},
 		move : function(x,y,z){
 			//console.log("move");
-			var message;
-			if(x == 0 && z == 0) {
-				message = JSON.stringify(stop_cmd);
-			} else {
-				move_cmd[1]["repeats"] = repeat_data[get_index(x)][get_index(z)];
-				message = JSON.stringify(move_cmd);
-			}
-			var buffer = new Buffer(message);
-			client.send(buffer, 0, buffer.length, PORT, HOST, function(err, bytes) {
-				//console.log("send : " + message);
+			get_client(function(client){
+				var message;
+				if(x == 0 && z == 0) {
+					message = JSON.stringify(stop_cmd);
+				} else {
+					move_cmd[1]["repeats"] = repeat_data[get_index(x)][get_index(z)];
+					message = JSON.stringify(move_cmd);
+				}
+				var buffer = new Buffer(message);
+				client.send(buffer, 0, buffer.length, PORT, HOST, function(err, bytes) {
+					//console.log("send : " + message);
+				});
 			});
 		}
 	};
+	return _this;
 }
 module.exports = new Handler();
